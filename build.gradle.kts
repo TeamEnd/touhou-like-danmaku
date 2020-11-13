@@ -4,10 +4,11 @@ plugins {
     kotlin("jvm") version "1.3.72"
     id("com.github.johnrengelman.shadow") version "5.2.0"
     id("kr.entree.spigradle") version "2.2.3"
+    kotlin("plugin.serialization") version "1.3.72"
 }
 
 group = "AlphaGot"
-version = "0.0.1a"
+version = "0.0.2a"
 
 repositories {
     mavenCentral()
@@ -15,9 +16,11 @@ repositories {
     maven(url = "https://repo.dmulloy2.net/nexus/repository/public/") //protocollib
     maven(url = "https://jitpack.io/") //tap, psychic
     maven(url = "https://maven.enginehub.org/repo/") //worldedit
+    jcenter()
 }
 
 dependencies {
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1")
     compileOnly(kotlin("stdlib-jdk8")) //kotlin
     compileOnly("junit:junit:4.12") //junit
     compileOnly(paper("1.16.3"))
@@ -56,7 +59,7 @@ tasks {
 if (!hasProperty("debug")) {
     tasks {
         shadowJar {
-            relocate("com.github.noonmaru.kommand", "com.github.noonmaru.parkourmaker.shaded")
+            relocate("com.alphagot.danmaku", "com.alphagot.danmaku.shaded")
         }
     }
 }

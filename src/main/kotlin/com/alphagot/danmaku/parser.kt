@@ -2,6 +2,8 @@ package com.alphagot.danmaku
 
 import com.sk89q.worldedit.math.Vector3
 import java.io.File
+import kotlinx.serialization.*
+import kotlinx.serialization.json.*
 
 enum class commandType{
     nop,
@@ -16,11 +18,13 @@ enum class commandType{
     meta
 }
 
+@Serializable
 data class command(
     val command: commandType,
     val params: List<String>
 )
 
+@Serializable
 data class danmakuType(
         val name: String,
         val block: String,
@@ -43,6 +47,10 @@ class parser(filename: String) {
             "metadata" -> return commandType.meta
         }
         return commandType.nop
+    }
+
+    fun enum2int(e: commandType): Int{
+        return e.ordinal
     }
 
     fun parse(): List<command> {

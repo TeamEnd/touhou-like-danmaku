@@ -82,11 +82,19 @@ class main(): JavaPlugin(){
         var rv = false
         when(command.name){
             "execpattern" -> {
-                if(args.isNotEmpty()){
+                rv = if(args.isNotEmpty()){
                     commandExecutor(danmaku[args[0]]!!, sender)
-                    rv = true
+                    true
                 }else{
-                    rv = false
+                    false
+                }
+            }
+            "execstage" -> {
+                rv = if(args.isNotEmpty()){
+                    commandExecutor(danmaku[args[0]]!!, sender)
+                    true
+                }else{
+                    false
                 }
             }
         }
